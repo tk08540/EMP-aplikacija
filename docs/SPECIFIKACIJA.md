@@ -74,7 +74,12 @@ Aplikacija rešuje problem rezerviranja teniških igrišč, trenerjev in opreme.
 
 | Pojem | Pomen v tej aplikaciji |
 |---|---|
-| ‹Termin› | ‹Enourni časovni interval na enem igrišču, ki se začne ob polni uri. Prvi termin dneva se začne ob 8.00, zadnji ob 21.00 in traja do 22.00. |
+| Termin | Enourni časovni interval na enem igrišču, ki se začne ob polni uri. Prvi termin dneva se začne ob 8.00, zadnji ob 21.00 in traja do 22.00. |
+| Rezervacija | Zasedba 1 do 3 zaporednih terminov na istem igrišču, ki jo odda ena stranka. |
+| Aktivna rezervacija | Rezervacija s statusom Potrjena ali Čakajoča. Samo aktivne rezervacije zasedajo termine. |
+| Zahteva za trening | Rezervacija, pri kateri je stranka izbrala trenerja. Dokler je trener ne potrdi ali zavrne, ima status Čakajoča. |
+| Oprema | 	Predmet, ki si ga stranka lahko izposodi ob rezervaciji (npr. lopar, žogice). Ima omejeno količino in ceno na uro. |
+| Cena na uro | Cena igrišča, trenerja ali kosa opreme za eno uro, v evrih. Podatek je na strežniku in se prikaže v ceniku. |
 
 
 ---
