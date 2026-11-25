@@ -74,7 +74,8 @@ Aplikacija rešuje problem rezerviranja teniških igrišč, trenerjev in opreme.
 
 | Pojem | Pomen v tej aplikaciji |
 |---|---|
-| ‹izraz, ki ima v vaši aplikaciji poseben pomen› | ‹…› |
+| ‹Termin› | ‹Enourni časovni interval na enem igrišču, ki se začne ob polni uri. Prvi termin dneva se začne ob 8.00, zadnji ob 21.00 in traja do 22.00. |
+
 
 ---
 
