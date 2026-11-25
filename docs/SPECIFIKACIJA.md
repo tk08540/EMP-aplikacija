@@ -492,8 +492,8 @@ erDiagram
 | oprema | seznam Oprema	| ne | izposojena oprema, en kos vsake izbrane vrste |
 
 ### ‹Podatki na napravi›
-| Ključ | Tip | Opis |
-|---|---|---|---|
+| Atribut | Tip | Opis |
+|---|---|---|
 | ‹token› | ‹string› | Žeton za avtentikacijo |
 | uporabnik_id | int  | Id prijavljenega uporabnika | 
 | username	| string | Prikaz imena v zgornji vrstici	| 
