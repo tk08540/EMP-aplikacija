@@ -359,7 +359,7 @@ Scenario: Obvestila niso omogočena
 
 | Podatek ali dovoljenje | Zakaj ga potrebujemo | Kdaj ga zahtevamo | Kje je shranjen |
 |---|---|---|---|
-| ‹npr. lokacija› | ‹…› | ‹…› | ‹…› |
+| uporabniško ime | Prijava in prikaz imena stranke trenerju pri zahtevi za trening | Ob registraciji | Na strežniku aplikacije |
 | e-poštni naslov | Za registracijo, prijav in identifikacijo uporabnika | Ob registraciji oiroma prijavi | Na strežniku obstoječe spletne aplikacije |
 | geslo | Za preverjanje identitete uporabnika pri prijavi | Ob registraciji oziroma prijavi | Na strežniku v varovani obliki, se ne shranjujejo v nešifrirani obliki na mobilni aplikaciji |
 | podatki o rezervacijah | Za prikaz, upravljanje in preklic uporabnikovih rezervacij | Ob uporabi funkcionalnosti rezervacij | Na strežniku obstoječe spletne aplikacije |
@@ -444,13 +444,62 @@ erDiagram
     }
 ```
 
-### ‹Entiteta›
+### ‹User›
 
 | Atribut | Tip | Obvezen | Opis |
 |---|---|---|---|
-| ‹id› | ‹string› | da | ‹…› |
+| ‹id› | ‹int› | da | Primarni ključ |
+| username | string (≤ 150)	| da | Uporabniško ime za prijavo, edinstveno |
+| email	| string | da	| E-poštni naslov |
+| password | string |	da | Zgoščena vrednost gesla (PBKDF2), nikoli se ne pošlje v aplikacijo |
+| role | string	| da | uporabnik (stranka), trener ali administrator, privzeto uporabnik |
+| telefon	| string (≤ 20)	| ne | Telefonska številka |
+| cena_ura	| decimal (6,2)	| da | Cena trenerja na uro v EUR, privzeto 45,00; pomembna samo za trenerje |
+| is_active	| bool| da | Neaktiven uporabnik se ne more prijaviti; administrator s tem trenerja odstrani iz izbire |
 
-**Hramba:** ‹kje so podatki: samo na napravi, samo na strežniku ali na obeh. Če na obeh: kateri vir je glavni in kaj se zgodi ob konfliktu.›
+
+### ‹Igrišča›
+| Atribut | Tip | Obvezen | Opis |
+|---|---|---|---|
+| ‹id› | ‹int› | da | Primarni ključ |
+| ime | string (≤ 150)	| da | Npr. Igrišče 1 |
+| povrsina	| string | da	| pesek, trava, trda,  |
+| aktivno | bool |	da | Zgoščena vrednost gesla (PBKDF2), nikoli se ne pošlje v aplikacijo |
+| role | string	| da | Neaktivno igrišče se ne prikaže v mreži in ceniku |
+| cena_ura	| decimal (6,2)	| da | Cena na uro v EUR, privzeto 10,00; |
+
+### ‹Oprema›
+| Atribut | Tip | Obvezen | Opis |
+|---|---|---|---|
+| ‹id› | ‹int› | da | Primarni ključ |
+| ime | string (≤ 150)	| da | Npr. Lopar, žogice |
+| kolicina	| int ≥ 0 | da | število kosov, ki jih ima klub  |
+| aktivno | bool |	da | Neaktivna oprema se ne ponudi pri rezervaciji |
+| cena_ura	| decimal (6,2)	| da | Cena izposoje na uro v EUR |
+
+### ‹Rezervacija›
+| Atribut | Tip | Obvezen | Opis |
+|---|---|---|---|
+| ‹id› | ‹int› | da | Primarni ključ |
+| uporabnik_id | int (FK → User) | da | Stranka, ki je oddala rezervacijo |
+| igrisca_id	| int (FK → Igrisca) | da	| Rezervirano igrišče  |
+| datum | date |	da | Dan rezervacija |
+| ura_zacetek | time	| da | Začetek, polna ura med 8.00 in 21.00 |
+| ura_konec	| time	| da | Konec, 1 do 3 ure po začetku, najkasneje 22h |
+| status | string | da | potrjena, cakajoca, zavrnjena ali preklicana |
+| ustarjena	| datetime | da	| čas oddaje, nastavi ga strežnik  |
+| trener_id | int (FK → User) |	ne | Trener, če ga je stranka izbrala |
+| oprema | seznam Oprema	| ne | izposojena oprema, en kos vsake izbrane vrste |
+
+### ‹Podatki na napravi›
+| Ključ | Tip | Opis |
+|---|---|---|---|
+| ‹token› | ‹string› | Žeton za avtentikacijo |
+| uporabnik_id | int  | Id prijavljenega uporabnika | 
+| username	| string | Prikaz imena v zgornji vrstici	| 
+| vloga | string | Določa začetni zaslon in spodnjo navigacijo |
+
+**Hramba:** Vsi podatki o igriščih, opremi, uporabnikih in rezervacijah so samo na strežniku. Aplikacija jih ob vsakem odprtju zaslona prebere znova in jih ne shranjuje lokalno, zato do konfliktov med napravo in strežnikom ne pride. Na napravi je samo seja (zgornja tabela). 
 
 ---
 
