@@ -361,6 +361,7 @@ Scenario: Obvestila niso omogočena
 |---|---|---|---|
 | uporabniško ime | Prijava in prikaz imena stranke trenerju pri zahtevi za trening | Ob registraciji | Na strežniku aplikacije |
 | e-poštni naslov | Za registracijo, prijav in identifikacijo uporabnika | Ob registraciji oiroma prijavi | Na strežniku obstoječe spletne aplikacije |
+| telefonska številka | Za kontaktiranje uporabnika v zvezi z njegovimi rezervacijami in morebitnimi spremembami | Ob registraciji | Na strežniku obstoječe spletne aplikacije |
 | geslo | Za preverjanje identitete uporabnika pri prijavi | Ob registraciji oziroma prijavi | Na strežniku v varovani obliki, se ne shranjujejo v nešifrirani obliki na mobilni aplikaciji |
 | podatki o rezervacijah | Za prikaz, upravljanje in preklic uporabnikovih rezervacij | Ob uporabi funkcionalnosti rezervacij | Na strežniku obstoječe spletne aplikacije |
 | Potisna obvestila | Za obveščanje uporabnika o pomembnih spremembah rezervacije | Ob prvi uporabi funkcionalnosti obvestil aplikacija uporabniku prestavi njihov namen in zaprosi za dovoljenje operacijskega sistema | Žeton naprave se shrani na strežniku za namen pošiljanja obvestil |
